@@ -60,77 +60,32 @@
         height: auto;
         max-width: 80%;
     }
-    .glow-on-hover {
-    width: 220px;
-    height: 50px;
-    border: none;
-    outline: none;
-    color: black;
-    background: linear-gradient(yellow,red);
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 10px;
-}
-
-.glow-on-hover:before {
-    content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8,black,navy,brown, #ff0000);
-    position: absolute;
-    top: -2px;
-    left:-2px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    animation: glowing 20s linear infinite;
-    opacity: 0;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
    
+
+    .ml6 {
+  position: relative;
+  font-weight: 100;
+  font-size: 1.5em;
+  color: aliceblue;
 }
 
-.glow-on-hover:active {
-    background: linear-gradient(yellow,red);
+.ml6 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
 }
 
-.glow-on-hover:active:after {
-    background: transparent;
+.ml6 .letter {
+  display: inline-block;
+  line-height: 1em;
 }
 
-.glow-on-hover:hover:before {
-    opacity: 1;
-}
-
-.glow-on-hover:after {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(yellow,red);
-    left: 0;
-    top: 0;
-    border-radius: 10px;
-    
-}
-.glow-on-hover a:hover{
-    text-decoration:none;
-}
-.glow-on-hover a{
-    color: black;
-    font-size: 1.5em;
-}
-#set-button{
-    text-align:center;
-    margin-top: 20px;
-}
-
-@keyframes glowing {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
+.fav{
+    text-align: center;
+    margin-top: -60px;
 }
         
     </style> 
@@ -155,13 +110,17 @@
             <br>
             <b>Your outdated browser doesn't support audio.</b>
     </audio>
+    <div class="fav">
+        <h1 class="ml6">
+            <span class="text-wrapper">
+              <span class="letters">Here is your Lucky Song !!</span>
+            </span>
+          </h1>
+       </div>
     <div id="box"><br><b>Title</b>: <span id="songTitle"></span><br>
         <b>Singer</b>: <span id="songAlbum"></span><br>
        </div> 
-       <div id="set-button">
-        <button class="glow-on-hover" type="button"><a href="index.html">Back to HOME</a></button> 
-    
-      </div> 
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script> 
     <script>
         var songs=[
         {filename: "songs/song1.mp3", title: "Closer", singer: "Chainsmokers"},
@@ -212,4 +171,29 @@
         document.getElementById("songAlbum").textContent=song.singer;
 
     </script>
+    <script>// Wrap every letter in a span
+        var textWrapper = document.querySelector('.ml6 .letters');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+        
+        anime.timeline({loop: true})
+          .add({
+            targets: '.ml6 .letter',
+            translateY: ["1.1em", 0],
+            translateZ: 0,
+            duration: 750,
+            delay: (el, i) => 50 * i
+          }).add({
+            targets: '.ml6',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1000
+          });
+          </script>
+          <script src="/audiojs/audio.min.js"></script>
+          <script>
+            audiojs.events.ready(function() {
+              var as = audiojs.createAll();
+            });
+          </script>
 </body>
