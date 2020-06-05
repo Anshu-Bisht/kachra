@@ -60,8 +60,17 @@
         height: auto;
         max-width: 80%;
     }
-   
-
+   #button-here{
+       text-align: center;
+       
+   }
+   .btn{
+       margin-top: 20px;
+       height:40px;
+       width: 200px;
+       background-color: navy;
+       color: white;
+   }
   
         
     </style> 
@@ -90,7 +99,10 @@
     <div id="box"><br><b>Title</b>: <span id="songTitle"></span><br>
         <b>Singer</b>: <span id="songAlbum"></span><br>
        </div> 
+      <div id="button-here">
+        <a href="index.html" class="btn btn-dark" role="button">BACK TO HOME</a>
    
+      </div> 
     <script>
         var songs=[
         {filename: "songs/song1.mp3", title: "Closer", singer: "Chainsmokers"},
